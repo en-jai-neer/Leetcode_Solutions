@@ -1,3 +1,28 @@
+//Iterative 1D
+public:
+    vector<vector<int>> dp;
+    int integerBreak(int n) {
+        vector<int> dp(n+1);
+        dp[0] = dp[1] = 1;
+        
+        for(int i = 2; i < n; i++)
+        {
+            for(int j = 1; j <= i; j++)
+            {
+                dp[i] = max(dp[i], j*dp[i-j]);
+            }
+        }
+        
+        //dp[n] = partition from 1 to n-1. Dont include the partition 0, n.
+        for(int j = 1; j < n; j++)
+        {
+            dp[n] = max(dp[n], j*dp[n-j]);
+        }
+        return dp[n];
+    }
+};
+
+//************************************************************************************************************************************//
 class Solution {
 private:
     int solve(int n, int i)
