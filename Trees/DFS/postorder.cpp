@@ -43,3 +43,29 @@ vector<int> Solution::postorderTraversal(TreeNode* A) {
     }
     return ans;
 }
+
+//Iterative without stack (Using visited)
+vector<int> Solution::postorderTraversal(TreeNode* A) {
+    vector<int> ans;
+    unordered_map<TreeNode*, TreeNode*> parentMap;
+    TreeNode* cur = A;
+    while(cur != NULL)
+    {
+        if(cur->left && parentMap.count(cur->left) == 0)
+        { 
+            parentMap[cur->left] = cur; 
+            cur = cur->left; 
+        } 
+        else if(cur->right && parentMap.count(cur->right) == 0)
+        { 
+            parentMap[cur->right] = cur; 
+            cur = cur->right; 
+        } 
+        else
+        { 
+            ans.push_back(cur->val);
+            cur = parentMap[cur]; 
+        } 
+    }
+    return ans;
+}
