@@ -69,3 +69,22 @@ vector<int> Solution::postorderTraversal(TreeNode* A) {
     }
     return ans;
 }
+
+// Iterative (Reverse of preorder)
+vector<int> Solution::postorderTraversal(TreeNode* A) {
+    vector<int> ans;
+    stack<TreeNode* > st;
+    st.push(A);
+    while(!st.empty())
+    {
+        TreeNode* cur = st.top();
+        st.pop();
+        ans.push_back(cur->val);
+        if(cur->left)
+            st.push(cur->left);
+        if(cur->right)
+            st.push(cur->right);
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
