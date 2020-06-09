@@ -16,6 +16,7 @@ private:
             dp[n][sum] = topDown(nums, n-1, sum);
         return dp[n][sum];
     }
+    
 public:
     vector<vector<int>> dp;
     bool canPartition(vector<int>& nums) {
@@ -34,6 +35,7 @@ public:
 
 //*********************************************************************************************************************************//
 //2D Bottom Up
+public:
 class Solution {
 public:
     bool canPartition(vector<int>& nums) {
@@ -72,26 +74,23 @@ public:
 // So why would we do this? This is because the numbers in nums can only be used once. If we can choose each number several times, we 
 // have to increase i from 0 to sum (Unbounded Knapsack - Coin Change problems)
 
-class Solution {
 public:
     bool canPartition(vector<int>& nums) {
-        int n = nums.size();
         int sum = 0;
+        int n = nums.size();
         for(int i: nums)
             sum += i;
         if(sum % 2 == 1)
             return false;
         sum /= 2;
-        vector<bool> dp(sum+1);
+        vector<bool> dp(sum+1, false);
         dp[0] = true;
-        for(int num: nums)
+        for(int i = 0; i < n; i++)
         {
-            for(int i = sum; i >= 0; i--)
+            for(int j = sum; j >= 0; j--)
             {
-                if(i - num>= 0)
-                {
-                    dp[i] = dp[i] || dp[i-num];
-                }
+                if(j - nums[i] >= 0)
+                    dp[j] = dp[j-nums[i]] || dp[j];
             }
         }
         return dp[sum];
