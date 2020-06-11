@@ -66,7 +66,7 @@ public:
     }
 };
 
-//1D Iterative
+//1D Iterative. We interchange the loops because our dp state is number of ways to get amount j using first i coins.
 public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
