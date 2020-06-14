@@ -76,7 +76,7 @@ public:
 };
 
 //Using upper and lower bounds
-lass Solution {
+class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
         int n = nums.size();
