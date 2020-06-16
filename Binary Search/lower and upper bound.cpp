@@ -7,12 +7,14 @@ while (start <= end)
         start = mid+1;
     else
         end = mid-1;
+    if(nums[mid] < target && nums[idx] != target)
+        idx = mid;
     if(nums[mid] == target)
         idx = mid;
 }
 return idx;
 
-//upper_bound
+//upper_bound = lower_bound(target+1)-1
 int start = 0, end = n-1, idx = -1;
 while (start <= end)
 {
@@ -21,7 +23,7 @@ while (start <= end)
         start = mid+1;
     else
         end = mid-1;
-    if(nums[mid] == target)
+    if(nums[mid] > target)
         idx = mid;
 }
 return idx;
